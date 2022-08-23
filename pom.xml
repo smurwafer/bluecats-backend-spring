@@ -47,6 +47,11 @@
 			<artifactId>jedis</artifactId>
 			<version>3.9.0</version>
 		</dependency>
+		<dependency>
+			<groupId>com.twilio.sdk</groupId>
+			<artifactId>twilio</artifactId>
+			<version>8.34.1</version>
+		</dependency>
 	</dependencies>
 
 	<build>

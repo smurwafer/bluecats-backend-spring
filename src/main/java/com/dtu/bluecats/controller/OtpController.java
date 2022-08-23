@@ -1,6 +1,5 @@
 package com.dtu.bluecats.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,20 +9,26 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dtu.bluecats.entity.Otp;
-import com.dtu.bluecats.repository.OtpRepository;
+import com.dtu.bluecats.entity.OtpDto;
+import com.dtu.bluecats.service.OtpService;
 
 @RestController
 public class OtpController {
 	@Autowired
-	private OtpRepository repository;
-	@PostMapping
-	public Otp saveOtp(@RequestBody Otp otp) {
-		return repository.save(otp);
+	private OtpService otpService;
+
+	@PostMapping("/auth/otp/create")
+	public Boolean saveOtp(@RequestBody OtpDto mobile) {
+		return otpService.createOtp(mobile);
 	}
+
+	@PostMapping("/auth/otp/verify")
+	public Boolean verifyOtp(@RequestBody Otp otp) {
+		return otpService.verifyOtp(otp);
+	}
+	
 	@GetMapping
 	public List <Otp> findAll() {
-		List <Otp> otps = new ArrayList<>();
-		repository.findAll().forEach(otps::add);
-		return otps;
+		return otpService.findAll();
 	}
 }
